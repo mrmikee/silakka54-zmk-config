@@ -10,6 +10,29 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
+    // CUSTOM BEHAVIORS FOR 50-70 WPM TYPING CADENCE
+    behaviors {
+        // Tuned behavior for home-row alpha mod-taps (like your Alt+A)
+        hm_alpha: home_row_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <175>;       // Lowered from 200ms to match faster typing
+            quick-tap-ms = <150>;          // Prevents accidental hold when double-tapping 'A'
+            flavor = "tap-preferred";      // Forces a tap if another key is struck quickly
+            bindings = <&kp>, <&kp>;
+        };
+
+        // Tuned behavior for thumb layer-taps and mod-taps
+        thumb_lt: thumb_layer_taps {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;       // Faster activation for snappy thumb keys
+            quick-tap-ms = <150>;          // Allows rapid space/repeat without triggering layers
+            flavor = "hold-preferred";     // Prioritizes layers/mods for thumb keys
+            bindings = <&mo>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -20,15 +43,14 @@
             // |  CTRL |  A  |  S  |  D   |  F   |  G   |                   |  H   |  J    |  K    |  L   |   ;   |   '   |
             // | SHIFT |  Z  |  X  |  C   |  V   |  B   |  n/a   |  |  n/a  |  N   |  M    |  ,    |  .   |   /   | SHIFT |
             //                     | GUI  | LOWER| SPACE|  n/a   |  |  n/a  | ENTER| RAISE | BSPC  |
-            // Note: Silakka54 has 54 keys - the 4 positions marked n/a are not present (inner thumb + encoder positions)
 
             display-name = "Base";
             bindings = <
-&kp ESC    &kp N1          &kp N2  &kp N3    &kp N4  &kp N5                     &kp N6       &kp N7  &kp N8          &kp N9   &kp N0         &kp BACKSPACE
-&kp TAB    &kp Q           &kp W   &kp E     &kp R   &kp T                      &kp Y        &kp U   &kp I           &kp O    &kp P          &kp BSLH
-&kp LCTRL  &mt LEFT_ALT A  &kp S   &kp D     &kp F   &kp G                      &kp H        &kp J   &kp K           &kp L    &kp SEMICOLON  &kp SQT
-&kp LSHFT  &kp Z           &kp X   &kp C     &kp V   &kp B      &none    &none  &kp N        &kp M   &kp COMMA       &kp DOT  &kp FSLH       &kp RSHFT
-                                   &kp LGUI  &mo 1   &lt 1 RET  &none    &none  &lt 2 SPACE  &mo 2   &mt DEL C_MUTE
+&kp ESC    &kp N1            &kp N2  &kp N3    &kp N4  &kp N5                           &kp N6             &kp N7  &kp N8          &kp N9   &kp N0         &kp BACKSPACE
+&kp TAB    &kp Q             &kp W   &kp E     &kp R   &kp T                            &kp Y              &kp U   &kp I           &kp O    &kp P          &kp BSLH
+&kp LCTRL  &hm_alpha LEFT_ALT A &kp S &kp D    &kp F   &kp G                            &kp H              &kp J   &kp K           &kp L    &kp SEMICOLON  &kp SQT
+&kp LSHFT  &kp Z             &kp X   &kp C     &kp V   &kp B            &none    &none  &kp N              &kp M   &kp COMMA       &kp DOT  &kp FSLH       &kp RSHFT
+                                     &kp LGUI  &mo 1   &thumb_lt 1 RET  &none    &none  &thumb_lt 2 SPACE  &mo 2   &mt DEL C_MUTE
             >;
         };
 
