@@ -18,7 +18,9 @@
             #binding-cells = <2>;
             tapping-term-ms = <150>;       // Lowered from 200ms to match faster typing
             quick-tap-ms = <150>;          // Prevents accidental hold when double-tapping 'A'
-            flavor = "tap-preferred";      // Forces a tap if another key is struck quickly
+            #flavor = "tap-preferred";      // Forces a tap if another key is struck quickly
+            flavor = "balanced";
+            require-prior-idle-ms = <150>;
             bindings = <&kp>, <&kp>;
         };
 
