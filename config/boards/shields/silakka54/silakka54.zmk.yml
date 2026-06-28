@@ -1,0 +1,12 @@
+
+file_format: "1"
+id: silakka54
+name: Silakka54
+type: shield
+features:
+  - keys
+  - studio
+  - display
+siblings:
+  - silakka54_left
+  - silakka54_right

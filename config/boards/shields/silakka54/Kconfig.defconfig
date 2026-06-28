@@ -1,0 +1,7 @@
+
+if SHIELD_SILAKKA54_LEFT || SHIELD_SILAKKA54_RIGHT
+
+config ZMK_KEYBOARD_NAME
+    default "Silakka54"
+
+endif
